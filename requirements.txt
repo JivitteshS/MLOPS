@@ -3,3 +3,4 @@ scikit-image
 scikit-learn==1.2.2
 scikit-learn-intelex==2023.2.0
 scipy==1.9.1
+langchain
