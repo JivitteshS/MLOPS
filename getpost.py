@@ -1,36 +1,37 @@
 from flask import Flask,render_template,request
+'''
+ It creates an instance of the Flask class, 
+ which will be your WSGI (Web Server Gateway Interface) application.
+'''
+###WSGI Application
+app=Flask(__name__)
 
-"""
-Create an isntance of flask  which will be  
-your WSGI applicaation
-
-"""
-##WSGI application
-app=Flask(__name__)  ##when I run the flask app the __name__ get striggered and the entire application runs"
-
-@app.route("/index",methods=['GET'])  #decorator. when I vist the homepage with "/" it will call teh fucntion provided below.
+@app.route("/")
 def welcome():
-    return render_template("index.html")
+    return "<html><H1>Welcome to the flask course</H1></html>"
 
-@app.route("/homepage")  #different route to get to a different page in the flask app
-def homepage():
-    return "Welcome to this homepage course..This is a good course."
+@app.route("/index",methods=['GET'])
+def index():
+    return render_template('index.html')
 
-@app.route("/about") 
+@app.route('/about')
 def about():
-    return render_template("about.html")
+    return render_template('about.html')
 
-@app.route("/form",methods=["GET", "POST"]) 
+@app.route('/form',methods=['GET','POST'])
 def form():
-    if request.method == "POST":
-        name = request.form.get("name")
-        return f"Hello, {name}!"
-    else:
-        return render_template("form.html")
+    if request.method=='POST':
+        name=request.form['name']
+        return f'Hello {name}!'
+    return render_template('form.html')
 
-#Basic structure for creating a web framework using flask
-if __name__ == "__main__":
+@app.route('/submit',methods=['GET','POST'])
+def submit():
+    if request.method=='POST':
+        name=request.form['name']
+        return f'Hello {name}!'
+    return render_template('form.html')
+
+
+if __name__=="__main__":
     app.run(debug=True)
-
-
-
